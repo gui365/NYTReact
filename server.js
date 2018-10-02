@@ -7,9 +7,9 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use("/api", apiRoutes);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use("/api", apiRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

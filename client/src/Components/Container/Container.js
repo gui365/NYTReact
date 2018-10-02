@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom"
 import Header from "../Header";
-import SearchForm from "../SearchForm";
-import SearchResults from '../SearchResults/SearchResults';
+import SearchContainer from '../SearchContainer/SearchContainer';
 import SavedArticles from "../SavedArticles/SavedArticles";
 import API from "../../utils/API";
 import axios from "axios";
@@ -10,31 +10,10 @@ import "../../App.css";
 class Container extends Component {
   state = {
     articles: [],
-    savedArticles: [],
     topic: "",
     startDate: "",
     endDate: ""
   };
-
-  componentDidMount() {
-    this.loadSavedArticles();
-  }
-
-  loadSavedArticles = () => {
-    API.getArticles()
-      .then(res => {
-        this.setState({ savedArticles: res.data });
-        console.log(res.data);
-      }
-      )
-      .catch(err => console.log(err));
-  };
-
-  // deleteBook = id => {
-  //   API.deleteBook(id)
-  //     .then(res => this.loadBooks())
-  //     .catch(err => console.log(err));
-  // };
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -62,26 +41,19 @@ class Container extends Component {
       queryString += `&end_date=${adjustedDate}`
     }
 
-    console.log(queryString);
-    
+    // console.log(queryString);
     axios.get(queryString)
     .then(data =>  {
       this.setState({ articles: data.data.response.docs });
-      console.log(data);
+      // console.log(data);
     })
     .catch(err => console.log(err));
   };
 
-  // getArticles = () => {
-  //   API.getArticles().then(res => this.setState({ savedArticles: res.data }))
-  // }
-
   saveArticle = (index) => {
-    const adjustedDate = (this.state.articles[index].pub_date).substring(0,10);
-
     API.saveArticle({
       title: this.state.articles[index].headline.main,
-      date: adjustedDate,
+      date: (this.state.articles[index].pub_date) ? (this.state.articles[index].pub_date).substring(0,10) : "No date",
       link: this.state.articles[index].web_url
     }).then(res => this.setState({ savedArticles: res.data }))
       .catch(err => console.log(err));
@@ -91,20 +63,21 @@ class Container extends Component {
     return (
       <div className="container">
         <Header />
-        <SearchForm
-          topic={this.state.topic}
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
-          methodChange={this.handleChange}
-          methodSubmit={this.handleSubmit}
+        <Route exact path="/"
+          render={(props) => <SearchContainer {...props}
+                                topic={this.state.topic}
+                                startDate={this.state.startDate}
+                                endDate={this.state.endDate}
+                                methodChange={this.handleChange}
+                                methodSubmit={this.handleSubmit}
+                                articles={this.state.articles}
+                                saveMethod={this.saveArticle}
+                              />}
         />
-        <SearchResults 
-          articles={this.state.articles}
-          saveMethod={this.saveArticle}
-        />
-        <SavedArticles 
-          savedArticles={this.state.savedArticles}
-          // deleteMethod={this.}
+        <Route exact path="/saved"
+          render={(props) => <SavedArticles {...props}
+                                savedArticles={this.state.savedArticles}
+                              />}
         />
       </div>
     )

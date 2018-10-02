@@ -6,5 +6,8 @@ export default {
   },
   saveArticle: function(newArticle) {
     return axios.post("/api/articles", newArticle);
+  },
+  deleteArticle: function(id) {
+    return axios.delete("/api/articles/" + id);
   }
 };

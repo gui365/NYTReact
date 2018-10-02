@@ -5,8 +5,7 @@ router.route("/articles")
   .get(articlesController.findAll)
   .post(articlesController.create);
 
-// router.delete("/articles", (req, res) => {
-
-// });
+router.route("/articles/:id")
+  .delete(articlesController.remove);
 
 module.exports = router;
