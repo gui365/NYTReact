@@ -4,7 +4,6 @@ import Header from "../Header";
 import SearchContainer from '../SearchContainer/SearchContainer';
 import SavedArticles from "../SavedArticles/SavedArticles";
 import API from "../../utils/API";
-import axios from "axios";
 import "../../App.css";
 
 class Container extends Component {
@@ -27,27 +26,17 @@ class Container extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    let queryString = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=b9f91d369ff59547cd47b931d8cbc56b:0:74623931`;
-    
-    if (this.state.topic) {
-      queryString += `&q=${this.state.topic}`
-    }
-    if (this.state.startDate) {
-      let adjustedDate = this.state.startDate.replace(/-/g, "");
-      queryString += `&begin_date=${adjustedDate}`
-    }
-    if (this.state.endDate) {
-      let adjustedDate = this.state.endDate.replace(/-/g, "");
-      queryString += `&end_date=${adjustedDate}`
-    }
 
-    // console.log(queryString);
-    axios.get(queryString)
-    .then(data =>  {
-      this.setState({ articles: data.data.response.docs });
-      // console.log(data);
-    })
-    .catch(err => console.log(err));
+    const params = {
+      q: (this.state.topic),
+      begin_date: (this.state.startDate) ? this.state.startDate.replace(/-/g, "") : "",
+      end_date: (this.state.endDate) ? this.state.endDate.replace(/-/g, "") : ""
+    }
+    // console.log(params);
+    
+    API.callNYT(params)
+      .then(res => this.setState({ articles: res.data }))
+      .catch(err => console.log(err));
   };
 
   saveArticle = (index) => {

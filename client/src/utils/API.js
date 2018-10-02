@@ -9,5 +9,8 @@ export default {
   },
   deleteArticle: function(id) {
     return axios.delete("/api/articles/" + id);
+  },
+  callNYT: function(params) {
+    return axios.get("/api/nyt", { params: params });
   }
 };
