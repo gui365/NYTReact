@@ -35,7 +35,10 @@ class Container extends Component {
     // console.log(params);
     
     API.callNYT(params)
-      .then(res => this.setState({ articles: res.data }))
+      .then(res => { 
+        this.setState({ articles: res.data })
+        // console.log(res.data);
+      })
       .catch(err => console.log(err));
   };
 

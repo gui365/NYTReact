@@ -3,10 +3,10 @@ import { Link } from "react-router-dom"
 import "../../App.css";
 
 const Header = () => (
-  <nav className="navbar navbar-expand-lg d-flex justify-content-between">
+  <nav className="navbar navbar-expand-lg d-flex justify-content-between p-fixed">
     <div>
       <a href="/">
-        New York Times Article Scrubber
+        <img id="logo" src={require("./nytp.png")} alt="NYT PORTAL logo" />
       </a>
     </div>
     

@@ -20,7 +20,7 @@ const SearchForm = ({ topic, startDate, endDate, methodChange, methodSubmit }) =
           <label htmlFor="date-to">End Date</label>
           <input name="endDate" value={endDate} onChange={methodChange} type="date" className="form-control" id="date-to"/>
         </div>
-        <button type="submit" onClick={methodSubmit} className="btn btn-primary">Search</button>
+        <button type="submit" onClick={methodSubmit} className="btn btn-primary search-button">SEARCH</button>
       </form>
     </div>
   </div>
