@@ -8,7 +8,8 @@ const SearchResults = ({ articles, saveMethod }) => (
       Results
     </div>
     <div className="card-body">
-      {articles.map((article, index) => {
+      {articles.length !== 0 ? 
+        articles.map((article, index) => {
         return <Result
                   index={index}          
                   title={article.headline.main}
@@ -17,7 +18,8 @@ const SearchResults = ({ articles, saveMethod }) => (
                   saveMethod={saveMethod}
                   key={article._id}
                 />
-      })}
+      }) :
+      <span>Search results will appear here</span>}
     </div>
   </div>
 );

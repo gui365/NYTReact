@@ -13,11 +13,12 @@ html, body, .navbar, .btn {
 
 /* --- HEADER COMPONENT --- */
 .header-option {
-  margin: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .header-option a {
   color: red;
+  font-size: 1rem;
 }
 
 #logo {
@@ -38,19 +39,19 @@ label {
 }
 
 /* --- SEARCHRESULTS COMPONENTS */
-.result-title {
+.result-title, .article-title {
   margin: 0;
   font-size: 1.2rem;
   color: black;
   font-weight: 700;
 }
 
-.result-date {
+.result-date, .article-date {
   font-size: 0.8rem;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
-.result-button {
+.result-button, .remove-button {
   background-color: black;
   color: white;
   font-size: 0.7rem;
@@ -58,17 +59,23 @@ label {
   border-radius: 20px;
 }
 
-.result {
+.result, .article {
   margin: 0.5rem 0;
   font-family: "Playfair Display", 'Times New Roman', Times, serif;
 }
 
 /* PSEUDOCLASSES */
-.result-button:hover {
+.result-button:hover, .remove-button:hover {
   background-color: red;
 }
 
 .header-option a:hover {
   text-decoration: none;
-  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.header-option:hover {
+  color: white;
+  border-radius: 30px;
+  margin-bottom: 20px solid red;
+  background-color: black;
 }

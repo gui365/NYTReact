@@ -36,7 +36,8 @@ class SavedArticles extends Component {
           Saved Articles
         </div>
         <div className="card-body">
-          {this.state.savedArticles.map(article => {
+        {this.state.savedArticles.length !== 0 ? 
+            this.state.savedArticles.map(article => {
             return <Article
                       title={article.title}
                       date={article.date}
@@ -45,7 +46,8 @@ class SavedArticles extends Component {
                       id={article._id}
                       deleteMethod={this.deleteSavedArticle}
                     />
-          })}
+          }) :
+          <span>There are no saved articles</span>}
         </div>
       </div>
     );
