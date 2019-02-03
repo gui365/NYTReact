@@ -18,7 +18,7 @@ module.exports = {
     cleanParams(params);
     console.log(params);
 
-    axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=[ADD-KEY-HERE]", { params })
+    axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=[ADD-API-KEY-HERE]", { params })
       .then(data => (res.json(data.data.response.docs)))
       .catch(err => console.log(err));
   }
